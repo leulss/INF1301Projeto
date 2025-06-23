@@ -7,10 +7,10 @@ with open('placar.json', 'r') as file:
     placar = json.load(file)
 
 """
-    Nome: retorna_placar(modo)
+    Nome: retorna_placar()
 
     Objetivo:
-        Retorna o placar atual entre os jogadores do tabuleiro da partida em andamento.
+        Retorna o placar atual entre os jogadores.
 
     Acoplamento:
         - retorno: {'Jogador1':N, 'Jogador2':M, 'IA':K} onde N, M, K são inteiros
