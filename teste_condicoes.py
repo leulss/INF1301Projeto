@@ -57,23 +57,23 @@ class TestCondicoes(unittest.TestCase):
         ]
         self.assertEqual(partida_acabou(matriz), 1)
 
-def test_empate(self):
-    print("Caso de Teste 07 - Empate")
-    matriz = [
-        [0, 1, 1],
-        [1, 0, 0],
-        [1, 0, 1]
-    ]
-    self.assertEqual(partida_acabou(matriz), 2)
+    def test_empate(self):
+        print("Caso de Teste 07 - Empate")
+        matriz = [
+            [0, 1, 1],
+            [1, 0, 0],
+            [1, 0, 1]
+        ]
+        self.assertEqual(partida_acabou(matriz), 2)
 
-def test_partida_em_andamento(self):
-    print("Caso de Teste 08 - Partida em andamento")
-    matriz = [
-        [0, -1, 1],
-        [-1, 0, 0],
-        [1, -1, 1]
-    ]
-    self.assertEqual(partida_acabou(matriz), -1)
+    def test_partida_em_andamento(self):
+        print("Caso de Teste 08 - Partida em andamento")
+        matriz = [
+            [0, -1, 1],
+            [-1, 0, 0],
+            [1, -1, 1]
+        ]
+        self.assertEqual(partida_acabou(matriz), -1)
 
 
 if __name__ == '__main__':

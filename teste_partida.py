@@ -1,5 +1,12 @@
 import unittest
-from partida import insere_lance, consulta_tabuleiro, partida_acabou
+from unittest.mock import patch
+from partida import (
+    insere_lance,
+    consulta_tabuleiro,
+    partida_acabou,
+    consulta_placar,
+    atualiza_placar
+)
 from tabuleiro import reinicia_tabuleiro
 
 class TestPartida(unittest.TestCase):
@@ -53,6 +60,28 @@ class TestPartida(unittest.TestCase):
         for i, j, mark in jogadas:
             insere_lance(i, j, mark)
         self.assertEqual(partida_acabou(), 2)
+
+    @patch('partida.retorna_placar', return_value={"Jogador1": 5, "Jogador2": 3, "IA": 2})
+    def test_consulta_placar_modo1(self, mock_retorna):
+        print("Caso de Teste 04 - consulta_placar modo=1 (versus jogador)")
+        # modo=1 deve remover a chave "IA"
+        resultado = consulta_placar(1)
+        esperado = {"Jogador1": 5, "Jogador2": 3}
+        self.assertEqual(resultado, esperado)
+
+    @patch('partida.retorna_placar', return_value={"Jogador1": 8, "Jogador2": 4, "IA": 7})
+    def test_consulta_placar_modo2(self, mock_retorna):
+        print("Caso de Teste 05 - consulta_placar modo=2 (versus IA)")
+        # modo=2 deve remover a chave "Jogador2"
+        resultado = consulta_placar(2)
+        esperado = {"Jogador1": 8, "IA": 7}
+        self.assertEqual(resultado, esperado)
+
+    @patch('partida.somar_vitoria')
+    def test_atualiza_placar_encapsulado(self, mock_somar):
+        print("Caso de Teste 06 - atualiza_placar chama somar_vitoria")
+        atualiza_placar(0)
+        mock_somar.assert_called_once_with(0)
 
 if __name__ == '__main__':
     unittest.main()
